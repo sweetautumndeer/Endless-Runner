@@ -16,7 +16,7 @@ class Play extends Phaser.Scene
 
     create()
     {
-
+        console.log("play scene!!");
     }
 
     update()
