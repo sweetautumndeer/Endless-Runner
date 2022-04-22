@@ -4,8 +4,11 @@
 
 let lanes = {
     top: 2,
+    topPosition: null,
     middle: 1,
-    bottom: 0
+    middlePosition: null,
+    bottom: 0,
+    bottomPosition: null
 }
 // Player Stats
 let playerConfig = {
@@ -28,6 +31,11 @@ class Player extends Phaser.GameObjects.Sprite
       this.targetLane = null;
       this.isSwitchingLanes = false;
       this.startTime = game.getTime();
+
+      // define lane positions
+      lanes.topPosition = game.config.height/3 + game.config.height/6;
+      lanes.middlePosition = game.config.height/2;
+      lanes.bottomPosition = game.config.height * 5/6;
 
       //this.sfxRocket = scene.sound.add('sfx_'); // sfx
     }
@@ -82,7 +90,7 @@ class Player extends Phaser.GameObjects.Sprite
         }
         else
         {
-            let pos = [ 0, 1000 ];
+            let pos = [ lanes.middlePosition, lanes.topPosition ];
             this.y = Phaser.Math.Interpolation.Linear(pos, timeElapsed / playerConfig.laneSwitchTime);
         }
     }
