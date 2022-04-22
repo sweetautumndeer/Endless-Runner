@@ -12,10 +12,12 @@ class Play extends Phaser.Scene
     preload()
     {
         this.load.image('player', './assets/tempChar.png');
+        this.load.image('player', './assets/tempBackground.png');
     }
 
     create()
     {
+        this.background = this.add.tileSprite(0, 0, 1366, 768, 'background').setOrigin(0, 0);
         console.log("play scene!!");
 
         this.player = new Player(this, game.config.width/2, game.config.height/2, 'player');
