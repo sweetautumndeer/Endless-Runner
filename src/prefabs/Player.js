@@ -2,13 +2,11 @@
 // Autumn Moulios, Ethan Nguyen, Em Coo
 // ---------------------------------------------
 
+// Lanes enum
 let lanes = {
     top: 2,
-    topPosition: null,
     middle: 1,
-    middlePosition: null,
     bottom: 0,
-    bottomPosition: null
 }
 // Player Stats
 let playerConfig = {
@@ -33,9 +31,7 @@ class Player extends Phaser.GameObjects.Sprite
       this.startTime = game.getTime();
 
       // define lane positions
-      lanes.topPosition = game.config.height/3 + game.config.height/6;
-      lanes.middlePosition = game.config.height/2;
-      lanes.bottomPosition = game.config.height * 5/6;
+      this.lanePos = [ game.config.height * 5/6, game.config.height/2, game.config.height/6 ];
 
       //this.sfxRocket = scene.sound.add('sfx_'); // sfx
     }
@@ -50,7 +46,6 @@ class Player extends Phaser.GameObjects.Sprite
         // switching lanes
         if (Phaser.Input.Keyboard.JustDown(keyUP) && !this.isSwitchingLanes)
         {
-            console.log("up");
             if (this.currentLane != lanes.top)
             {
                 this.targetLane = this.currentLane + 1;
@@ -62,7 +57,6 @@ class Player extends Phaser.GameObjects.Sprite
         }
         if (Phaser.Input.Keyboard.JustDown(keyDOWN) && !this.isSwitchingLanes)
         {
-            console.log("down");
             if (this.currentLane != lanes.bottom)
             {
                 this.targetLane = this.currentLane - 1;
@@ -82,15 +76,16 @@ class Player extends Phaser.GameObjects.Sprite
 
     SwitchLanes(timeElapsed)
     {
-        console.log("switching lanes...");
         if (timeElapsed / playerConfig.laneSwitchTime >= 1)
         {
             this.isSwitchingLanes = false;
-            this.y = 100;
+            this.y = this.lanePos[this.targetLane];
+            this.currentLane = this.targetLane;
+            this.targetLane = null;
         }
         else
         {
-            let pos = [ lanes.middlePosition, lanes.topPosition ];
+            let pos = [ this.lanePos[this.currentLane], this.lanePos[this.targetLane] ];
             this.y = Phaser.Math.Interpolation.Linear(pos, timeElapsed / playerConfig.laneSwitchTime);
         }
     }
