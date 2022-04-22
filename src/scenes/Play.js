@@ -12,14 +12,16 @@ class Play extends Phaser.Scene
     preload()
     {
         this.load.image('player', './assets/tempChar.png');
-        this.load.image('player', './assets/tempBackground.png');
+        this.load.image('tempBackground', './assets/tempBackground.png');
     }
 
     create()
     {
-        this.background = this.add.tileSprite(0, 0, 1366, 768, 'background').setOrigin(0, 0);
+        //defines background
+        this.background = this.add.tileSprite(0, 0, 1366, 768, 'tempBackground').setOrigin(0, 0);
         console.log("play scene!!");
 
+        //player definition
         this.player = new Player(this, game.config.width/2, game.config.height/2, 'player');
 
         // Define game controls
@@ -27,10 +29,38 @@ class Play extends Phaser.Scene
         keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
         keyX = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
+
+        // initialize score
+        this.p1Score = 0;
+
+        // display score
+        let scoreConfig = {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor: '#F3B141',
+            color: '#843605',
+            align: 'right',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 100
+        }
+        this.scoreLeft = this.add.text(game.config.width/3, game.config.height/3, this.p1Score, scoreConfig);
+
+
+
     }
 
     update()
     {
         this.player.update();
+        this.updateScore();
+        this.background.tilePositionX +=4;
+    }
+
+    updateScore(){
+        this.p1Score += 1/5;
+        this.scoreLeft.text  = Math.floor(this.p1Score);
     }
 }
