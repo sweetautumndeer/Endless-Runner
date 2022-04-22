@@ -11,7 +11,7 @@ class Play extends Phaser.Scene
 
     preload()
     {
-        this.load.image('player', './assets/tempChar.png');
+        this.load.image('player', './assets/ship_sprite1.png');
         this.load.image('tempBackground', './assets/tempBackground.png');
     }
 
