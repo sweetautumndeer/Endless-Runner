@@ -13,6 +13,7 @@ class Play extends Phaser.Scene
     {
         this.load.image('player', './assets/ship_sprite1.png');
         this.load.image('playerframe2', './assets/ship_sprite2.png');
+        this.load.image('playerframe3', './assets/ship_sprite3.png');
         this.load.image('tempBackground', './assets/tempBackground.png');
     }
 
@@ -23,9 +24,10 @@ class Play extends Phaser.Scene
             key: 'waves',
             frames: [
                {key: 'player'},
-               {key: 'playerframe2'}
+               {key: 'playerframe2'},
+               {key: 'playerframe3'}
             ],
-            frameRate: 4,
+            frameRate: 6,
             repeat: -1
         });     
 
