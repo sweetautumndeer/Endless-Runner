@@ -12,17 +12,29 @@ class Play extends Phaser.Scene
     preload()
     {
         this.load.image('player', './assets/ship_sprite1.png');
+        this.load.image('playerframe2', './assets/ship_sprite2.png');
         this.load.image('tempBackground', './assets/tempBackground.png');
     }
 
     create()
     {
+        // initialize animation
+        this.anims.create({
+            key: 'waves',
+            frames: [
+               {key: 'player'},
+               {key: 'playerframe2'}
+            ],
+            frameRate: 4,
+            repeat: -1
+        });     
+
         //defines background
         this.background = this.add.tileSprite(0, 0, 1366, 768, 'tempBackground').setOrigin(0, 0);
         console.log("play scene!!");
 
         //player definition
-        this.player = new Player(this, game.config.width/2, game.config.height/2, 'player');
+        this.player = new Player(this, game.config.width/2, game.config.height/2, 'player').play('waves');
 
         // Define game controls
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
@@ -47,8 +59,6 @@ class Play extends Phaser.Scene
             fixedWidth: 100
         }
         this.scoreLeft = this.add.text(game.config.width/3, game.config.height/3, this.p1Score, scoreConfig);
-
-
 
     }
 
