@@ -36,7 +36,7 @@ class Play extends Phaser.Scene
         console.log("play scene!!");
 
         //player definition
-        this.player = new Player(this, game.config.width/2, game.config.height/2, 'player').play('waves');
+        this.player = new Player(this, game.config.width/8, game.config.height/2, 'player').play('waves');
 
         // Define game controls
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
@@ -68,7 +68,7 @@ class Play extends Phaser.Scene
     {
         this.player.update();
         this.updateScore();
-        this.background.tilePositionX +=4;
+        this.background.tilePositionX += this.player.playerConfig.initMoveSpeed;
     }
 
     updateScore(){

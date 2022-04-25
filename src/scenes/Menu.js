@@ -17,8 +17,23 @@ class Menu extends Phaser.Scene
 
     create()
     {
-        // UI here lol
-        console.log("menu!");
+        // menu text configuration
+        let menuConfig = {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor: '#AA11AA',
+            color: '#FF77FF',
+            align: 'right',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 0
+        }
+        
+        // show menu text
+        this.add.text(game.config.width/2, game.config.height/2, 'Unnamed Pirate Runner', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + 50, 'Press \'Z\' to start!', menuConfig).setOrigin(0.5);
 
         // Define menu controls
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
