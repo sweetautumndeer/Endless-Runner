@@ -61,6 +61,19 @@ class Play extends Phaser.Scene
             fixedWidth: 100
         }
         this.scoreLeft = this.add.text(game.config.width/3, game.config.height/3, this.p1Score, scoreConfig);
+        // small tutorial
+        let tutorialConfig = {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor: '#F3B141',
+            color: '#843605',
+            align: 'center',
+            padding: {
+                top: 5,
+                bottom: 5,
+            }
+        }
+        this.tutorial = this.add.text(game.config.width/2 , game.config.height/2, "Use ↑ and ↓ to move", tutorialConfig);
 
     }
 
@@ -69,6 +82,13 @@ class Play extends Phaser.Scene
         this.player.update();
         this.updateScore();
         this.background.tilePositionX += this.player.playerConfig.initMoveSpeed;
+
+        if (keyDOWN.isDown || keyUP.isDown)
+        {
+            console.log("h");
+            this.tutorial.destroy();
+        }
+            
     }
 
     updateScore(){
