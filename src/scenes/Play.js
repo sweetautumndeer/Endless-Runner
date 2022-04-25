@@ -15,6 +15,7 @@ class Play extends Phaser.Scene
         this.load.image('playerframe2', './assets/ship_sprite2.png');
         this.load.image('playerframe3', './assets/ship_sprite3.png');
         this.load.image('tempBackground', './assets/tempBackground.png');
+        this.load.image('heart', './assets/heart.png');
     }
 
     create()
@@ -78,6 +79,10 @@ class Play extends Phaser.Scene
         }
         this.tutorial = this.add.text(game.config.width/2 , game.config.height/2, "Use ↑ and ↓ to move", tutorialConfig);
 
+        // Health UI
+        this.heart1 = this.add.sprite(game.config.width - 50, game.config.height/16, 'heart');
+        this.heart2 = this.add.sprite(game.config.width - 120, game.config.height/16, 'heart');
+        this.heart3 = this.add.sprite(game.config.width - 190, game.config.height/16, 'heart');
     }
 
     update()
