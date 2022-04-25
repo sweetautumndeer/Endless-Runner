@@ -12,6 +12,7 @@ let lanes = {
 let playerConfig = {
     initMoveSpeed: 2, // movement speed at game start
     maxMoveSpeed: 10, // movement speed after a good while
+    moveSpeedIncreasePerSecond: 0.05, // how fast the movement speed increases
     startingLane: lanes.middle, // starting position
     laneSwitchTime: 250 // milliseconds taken to switch lanes
 }

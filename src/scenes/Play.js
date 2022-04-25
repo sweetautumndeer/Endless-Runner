@@ -37,6 +37,9 @@ class Play extends Phaser.Scene
 
         //player definition
         this.player = new Player(this, game.config.width/8, game.config.height/2, 'player').play('waves');
+        this.moveSpeed = this.player.playerConfig.initMoveSpeed;
+        this.startTime = game.getTime();
+        this.currentTime = this.startTime;
 
         // Define game controls
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
@@ -81,7 +84,16 @@ class Play extends Phaser.Scene
     {
         this.player.update();
         this.updateScore();
-        this.background.tilePositionX += this.player.playerConfig.initMoveSpeed;
+
+        this.currentTime = game.getTime();
+        this.deltaT = (this.currentTime - this.startTime) / 1000; // change in time in seconds
+        this.startTime = this.currentTime;
+        if (this.moveSpeed >= this.player.playerConfig.maxMoveSpeed)
+            this.moveSpeed = this.player.playerConfig.maxMoveSpeed;
+        else
+            this.moveSpeed += this.player.playerConfig.moveSpeedIncreasePerSecond * this.deltaT;
+
+        this.background.tilePositionX += this.moveSpeed * this.deltaT * 100;
 
         if (keyDOWN.isDown || keyUP.isDown)
         {
@@ -92,7 +104,7 @@ class Play extends Phaser.Scene
     }
 
     updateScore(){
-        this.p1Score += 1/5;
+        this.p1Score += 1/5 * this.moveSpeed;
         this.scoreLeft.text  = Math.floor(this.p1Score);
     }
 }
