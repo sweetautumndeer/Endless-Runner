@@ -101,10 +101,7 @@ class Play extends Phaser.Scene
         this.background.tilePositionX += this.moveSpeed * this.deltaT * 100;
 
         if (keyDOWN.isDown || keyUP.isDown)
-        {
-            console.log("h");
-            this.tutorial.destroy();
-        }
+            this.tutorial.destroy(); // destroy tutorial once player listens to it
             
     }
 
