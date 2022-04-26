@@ -114,8 +114,18 @@ class Play extends Phaser.Scene
 
         if(this.checkCollision(this.player, this.obstacle1)){
             console.log("hit");
+            this.obstacle1.destroy()
+            this.obstacle1 = this.spawnNewObstacle();
+            
         }
-            this.tutorial.destroy(); // destroy tutorial once player listens to it
+
+        if(this.obstacle1.OutOfBounds){
+            console.log("out of bounds");
+            this.obstacle1.destroy()
+            this.obstacle1 = this.spawnNewObstacle();
+        }
+        
+    
             
     }
 
@@ -135,4 +145,9 @@ class Play extends Phaser.Scene
             return false;
         }
     }
+
+    spawnNewObstacle(){
+        return new Obstacle(this, game.config.width, game.config.height/2 - 50, 'shork', 0, 1).setOrigin(0,0);
+    }
+   
 }

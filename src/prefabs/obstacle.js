@@ -8,20 +8,19 @@ class Obstacle extends Phaser.GameObjects.Sprite {
         scene.add.existing(this);   // add to existing scene
         this.damage = damageVal;   // store pointValue
         this.lanePos = [ game.config.height * 5/6, game.config.height/2, game.config.height/6 ];
+        this.y = this.lanePos[Math.floor(Math.random() * 3)];
+        this.OutOfBounds = false;
+        this.setScale(3)
                // pixels per frame
     }
 
     update() {
         // move spaceship left
-        this.x -= 2;
+        this.x -= 4;
         // wrap around from left edge to right edge
         if(this.x <= 0 - this.width) {
-            this.reset();
+            this.OutOfBounds = true;;
         }
     }
 
-    // position reset
-    reset() {
-        this.destroy();
-    }
 }
