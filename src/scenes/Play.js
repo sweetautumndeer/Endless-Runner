@@ -15,6 +15,7 @@ class Play extends Phaser.Scene
         this.load.image('playerframe2', './assets/ship_sprite2.png');
         this.load.image('playerframe3', './assets/ship_sprite3.png');
         this.load.image('tempBackground', './assets/tempBackground.png');
+        this.load.image('shork', './assets/shork.png');
     }
 
     create()
@@ -37,6 +38,8 @@ class Play extends Phaser.Scene
 
         //player definition
         this.player = new Player(this, game.config.width/8, game.config.height/2, 'player').play('waves');
+        this.obstacle1 = new Obstacle(this, game.config.width, game.config.height/2 - 50, 'shork', 0, 1).setOrigin(0,0);
+        this.obstacle1.setScale(3);
         this.moveSpeed = this.player.playerConfig.initMoveSpeed;
         this.startTime = game.getTime();
         this.currentTime = this.startTime;
@@ -78,11 +81,14 @@ class Play extends Phaser.Scene
         }
         this.tutorial = this.add.text(game.config.width/2 , game.config.height/2, "Use ↑ and ↓ to move", tutorialConfig);
 
+        
+
     }
 
     update()
     {
         this.player.update();
+        this.obstacle1.update();
         this.updateScore();
 
         this.currentTime = game.getTime();
@@ -100,11 +106,27 @@ class Play extends Phaser.Scene
             console.log("h");
             this.tutorial.destroy();
         }
+
+        if(this.checkCollision(this.player, this.obstacle1)){
+            console.log("hit");
+        }
             
     }
 
     updateScore(){
         this.p1Score += 1/5 * this.moveSpeed;
         this.scoreLeft.text  = Math.floor(this.p1Score);
+    }
+
+    checkCollision(player, obstacle) {
+        // simple AABB checking
+        if (player.x < obstacle.x + obstacle.width && 
+            player.x + player.width > obstacle.x && 
+            player.y < obstacle.y + obstacle.height &&
+            player.height + player.y > obstacle.y) {
+                return true;
+        } else {
+            return false;
+        }
     }
 }
