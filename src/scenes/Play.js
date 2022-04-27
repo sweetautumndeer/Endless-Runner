@@ -25,20 +25,11 @@ class Play extends Phaser.Scene
 
     create()
     {
-        var shipframes = this.anims.generateFrameNames('ship', { prefix: 'ship', start: 0, end: 1, zeroPad: 2 })
+        // initialize animations
+        var shipframes = this.anims.generateFrameNames('ship', { prefix: 'ship', start: 0, end: 1, zeroPad: 2})
         this.anims.create({ key: 'sails', frames: shipframes, frameRate: 4, repeat: -1 });
-
-        // initialize animation
-        /*this.anims.create({
-            key: 'waves',
-            frames: [
-               {key: 'player'},
-               {key: 'playerframe2'},
-               {key: 'playerframe3'}
-            ],
-            frameRate: 6,
-            repeat: -1
-        });*/  
+        var shiphurts = this.anims.generateFrameNames('ship', { prefix: 'shiphurt', start: 1, end: 2, zeroPad: 2 });
+        this.anims.create({ key: 'hurt', frames: shiphurts, frameRate: 6, repeat: 3});
 
         //defines background
         this.background = this.add.tileSprite(0, 0, 2600, 768, 'sky_bg').setOrigin(0, 0);
@@ -99,7 +90,7 @@ class Play extends Phaser.Scene
         {
             this.heartArray.push(this.add.sprite(game.config.width - initialHeartOffset - heartOffset * i, game.config.height/16, 'heart'))
         }
-        
+
     }
 
     update()
@@ -126,6 +117,11 @@ class Play extends Phaser.Scene
             this.obstacle1.destroy()
             this.obstacle1 = this.spawnNewObstacle();
 
+            // play damage animation
+            this.player.play('hurt');
+            this.player.on('animationcomplete', () => {    // callback after anim completes
+                this.player.play('sails');
+            });
 
             if(this.heartArray != 0){
                 this.damagedHeart = this.heartArray.pop()
