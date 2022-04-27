@@ -2,20 +2,7 @@
 // Autumn Moulios, Ethan Nguyen, Em Coo
 // ---------------------------------------------
 
-// Lanes enum
-let lanes = {
-    top: 2,
-    middle: 1,
-    bottom: 0,
-}
-// Player Stats
-let playerConfig = {
-    initMoveSpeed: 2, // movement speed at game start
-    maxMoveSpeed: 10, // movement speed after a good while
-    moveSpeedIncreasePerSecond: 0.05, // how fast the movement speed increases
-    startingLane: lanes.middle, // starting position
-    laneSwitchTime: 250 // milliseconds taken to switch lanes
-}
+
 
 class Player extends Phaser.GameObjects.Sprite 
 {
@@ -38,7 +25,7 @@ class Player extends Phaser.GameObjects.Sprite
       
 
       // define lane positions
-      this.lanePos = [ game.config.height * 5/6, game.config.height/2, game.config.height/6 ];
+      
 
       //this.sfxRocket = scene.sound.add('sfx_'); // sfx
     }
@@ -110,7 +97,7 @@ class Player extends Phaser.GameObjects.Sprite
         {
             // snap into new lane & change currentLane value
             this.isSwitchingLanes = false;
-            this.y = this.lanePos[this.targetLane];
+            this.y = lanePos[this.targetLane];
             this.currentLane = this.targetLane;
             // if another switch is queued, immediately start it
             if (this.nextTargetLane != null)
@@ -125,7 +112,7 @@ class Player extends Phaser.GameObjects.Sprite
         }
         else
         {
-            let lerpPositions = [ this.lanePos[this.currentLane], this.lanePos[this.targetLane] ];
+            let lerpPositions = [ lanePos[this.currentLane], lanePos[this.targetLane] ];
             this.y = Phaser.Math.Interpolation.Linear(lerpPositions, timeElapsed);
         }
     }

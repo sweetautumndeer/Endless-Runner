@@ -48,7 +48,6 @@ class Play extends Phaser.Scene
         this.player = new Player(this, game.config.width/8, game.config.height/2, 'ship').play('sails');
         this.obstacle1 = new Obstacle(this, game.config.width, game.config.height/2 - 50, 'shork', 0, 1).setOrigin(0,0);
         this.obstacle1.setScale(3);
-        this.moveSpeed = this.player.playerConfig.initMoveSpeed;
         this.startTime = game.getTime();
         this.currentTime = this.startTime;
 
@@ -99,21 +98,17 @@ class Play extends Phaser.Scene
 
     update()
     {
-        this.player.update();
-        this.obstacle1.update();
-        this.updateScore();
-
         this.currentTime = game.getTime();
-        this.deltaT = (this.currentTime - this.startTime) / 1000; // change in time in seconds
+        deltaT = (this.currentTime - this.startTime) / 1000; // change in time in seconds
         this.startTime = this.currentTime;
-        if (this.moveSpeed >= this.player.playerConfig.maxMoveSpeed)
-            this.moveSpeed = this.player.playerConfig.maxMoveSpeed;
+        if (currentSpeed >= playerConfig.maxMoveSpeed)
+            currentSpeed = playerConfig.maxMoveSpeed;
         else
-            this.moveSpeed += this.player.playerConfig.moveSpeedIncreasePerSecond * this.deltaT;
+            currentSpeed += playerConfig.moveSpeedIncreasePerSecond * deltaT;
 
         // background scrolling
-        this.background.tilePositionX += this.moveSpeed * this.deltaT * 50;
-        this.clouds.tilePositionX += this.moveSpeed * this.deltaT * 75;
+        this.background.tilePositionX += currentSpeed * deltaT;
+        this.clouds.tilePositionX += currentSpeed * deltaT * 1.5;
 
         if (keyDOWN.isDown || keyUP.isDown)
         {
@@ -135,11 +130,13 @@ class Play extends Phaser.Scene
         }
         
     
-            
+        this.player.update();
+        this.obstacle1.update();
+        this.updateScore();
     }
 
     updateScore(){
-        this.p1Score += 1/5 * this.moveSpeed;
+        this.p1Score += currentSpeed / 100;
         this.scoreLeft.text  = Math.floor(this.p1Score);
     }
 
