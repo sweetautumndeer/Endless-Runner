@@ -10,10 +10,12 @@ class Play extends Phaser.Scene
     }
 
     preload()
-    {
-        this.load.image('player', './assets/ship_sprite1.png');
+    {   
+        this.load.atlas('ship', './assets/shipspritesheet.png', './assets/shipsprites.json');
+
+        /*this.load.image('player', './assets/ship_sprite1.png');
         this.load.image('playerframe2', './assets/ship_sprite2.png');
-        this.load.image('playerframe3', './assets/ship_sprite3.png');
+        this.load.image('playerframe3', './assets/ship_sprite3.png');*/
         this.load.image('sky_bg', './assets/sky_bg.png');
         this.load.image('clouds', './assets/clouds.png');
         this.load.image('shork', './assets/shork.png');
@@ -22,8 +24,11 @@ class Play extends Phaser.Scene
 
     create()
     {
+        var shipframes = this.anims.generateFrameNames('ship', { prefix: 'ship', start: 0, end: 1, zeroPad: 2 })
+        this.anims.create({ key: 'sails', frames: shipframes, frameRate: 4, repeat: -1 });
+
         // initialize animation
-        this.anims.create({
+        /*this.anims.create({
             key: 'waves',
             frames: [
                {key: 'player'},
@@ -32,7 +37,7 @@ class Play extends Phaser.Scene
             ],
             frameRate: 6,
             repeat: -1
-        });     
+        });*/  
 
         //defines background
         this.background = this.add.tileSprite(0, 0, 2600, 768, 'sky_bg').setOrigin(0, 0);
@@ -40,7 +45,7 @@ class Play extends Phaser.Scene
         console.log("play scene!!");
 
         //player definition
-        this.player = new Player(this, game.config.width/8, game.config.height/2, 'player').play('waves');
+        this.player = new Player(this, game.config.width/8, game.config.height/2, 'ship').play('sails');
         this.obstacle1 = new Obstacle(this, game.config.width, game.config.height/2 - 50, 'shork', 0, 1).setOrigin(0,0);
         this.obstacle1.setScale(3);
         this.moveSpeed = this.player.playerConfig.initMoveSpeed;
