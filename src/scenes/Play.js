@@ -20,6 +20,7 @@ class Play extends Phaser.Scene
         this.load.image('clouds', './assets/clouds.png');
         this.load.image('shork', './assets/shork.png');
         this.load.image('heart', './assets/heart.png');
+        this.load.image('gun', './assets/gun_png_by_xx_thanosbeatbox_xx_ddxajtn-fullview.png')
     }
 
     create()

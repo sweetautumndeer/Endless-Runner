@@ -12,6 +12,14 @@ class Player extends Phaser.GameObjects.Sprite
   
       // add object to existing scene
       scene.add.existing(this);
+      this.gun = new Phaser.GameObjects.Sprite(scene, x + 40, y, 'gun');
+      scene.add.existing(this.gun);
+      this.gun.setScale(0.25);
+      this.gun.visible = false;
+      if (playerConfig.gunMode)
+      {
+          this.gun.visible = true;
+      }
 
       this.moveSpeed = playerConfig.initMoveSpeed;
       this.startTime = game.getTime();
@@ -22,7 +30,7 @@ class Player extends Phaser.GameObjects.Sprite
       this.isSwitchingLanes = false;
       // init configs
       this.playerConfig = playerConfig;
-      
+
       //this.sfxRocket = scene.sound.add('sfx_'); // sfx
     }
 
@@ -94,6 +102,7 @@ class Player extends Phaser.GameObjects.Sprite
             // snap into new lane & change currentLane value
             this.isSwitchingLanes = false;
             this.y = lanePos[this.targetLane];
+            this.gun.y = lanePos[this.targetLane];
             this.currentLane = this.targetLane;
             // if another switch is queued, immediately start it
             if (this.nextTargetLane != null)
@@ -110,6 +119,7 @@ class Player extends Phaser.GameObjects.Sprite
         {
             let lerpPositions = [ lanePos[this.currentLane], lanePos[this.targetLane] ];
             this.y = Phaser.Math.Interpolation.Linear(lerpPositions, timeElapsed);
+            this.gun.y = Phaser.Math.Interpolation.Linear(lerpPositions, timeElapsed);
         }
     }
   }
