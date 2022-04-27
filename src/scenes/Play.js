@@ -14,7 +14,7 @@ class Play extends Phaser.Scene
         this.load.image('player', './assets/ship_sprite1.png');
         this.load.image('playerframe2', './assets/ship_sprite2.png');
         this.load.image('playerframe3', './assets/ship_sprite3.png');
-        this.load.image('tempBackground', './assets/tempBackground.png');
+        this.load.image('sky_bg', './assets/sky_bg.png');
         this.load.image('shork', './assets/shork.png');
         this.load.image('heart', './assets/heart.png');
     }
@@ -34,7 +34,7 @@ class Play extends Phaser.Scene
         });     
 
         //defines background
-        this.background = this.add.tileSprite(0, 0, 1366, 768, 'tempBackground').setOrigin(0, 0);
+        this.background = this.add.tileSprite(0, 0, 2600, 768, 'sky_bg').setOrigin(0, 0);
         console.log("play scene!!");
 
         //player definition
@@ -104,7 +104,7 @@ class Play extends Phaser.Scene
         else
             this.moveSpeed += this.player.playerConfig.moveSpeedIncreasePerSecond * this.deltaT;
 
-        this.background.tilePositionX += this.moveSpeed * this.deltaT * 100;
+        this.background.tilePositionX += this.moveSpeed * this.deltaT * 50;
 
         if (keyDOWN.isDown || keyUP.isDown)
         {
