@@ -53,6 +53,7 @@ class Menu extends Phaser.Scene
         {
             console.log('Konami Code entered!');
             playerConfig.gunMode = true; // enable gun mode
+            playerConfig.health = 20;
         });
     }
 

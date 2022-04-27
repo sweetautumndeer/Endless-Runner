@@ -91,14 +91,14 @@ class Play extends Phaser.Scene
         
 
         // Health UI
-        this.heart1 = this.add.sprite(game.config.width - 50, game.config.height/16, 'heart');
-        this.heart2 = this.add.sprite(game.config.width - 120, game.config.height/16, 'heart');
-        this.heart3 = this.add.sprite(game.config.width - 190, game.config.height/16, 'heart');
-        this.heartArray = [
-            this.heart1,
-            this.heart2,
-            this.heart3
-        ]
+        this.heartArray = [];
+        let initialHeartOffset = 60;
+        let heartOffset = 70 - 2 * playerConfig.health;
+        for (let i = 0; i < playerConfig.health; ++i)
+        {
+            this.heartArray.push(this.add.sprite(game.config.width - initialHeartOffset - heartOffset * i, game.config.height/16, 'heart'))
+        }
+        
     }
 
     update()
@@ -117,7 +117,6 @@ class Play extends Phaser.Scene
 
         if (keyDOWN.isDown || keyUP.isDown)
         {
-            console.log("h");
             this.tutorial.destroy();
         }
 
@@ -128,7 +127,7 @@ class Play extends Phaser.Scene
 
 
             if(this.heartArray != 0){
-                this.damagedHeart = this.heartArray.shift()
+                this.damagedHeart = this.heartArray.pop()
                 this.damagedHeart.destroy()
             }
             if(this.heartArray.length == 0){

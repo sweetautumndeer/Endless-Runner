@@ -24,6 +24,7 @@ let lanes = {
 let lanePos = [ config.height * 5/6, config.height/2, config.height/6 ];
 // Player Stats
 let playerConfig = {
+    health: 3,
     initMoveSpeed: 200, // movement speed at game start
     maxMoveSpeed: 1000, // movement speed after a good while
     moveSpeedIncreasePerSecond: 5, // how fast the movement speed increases

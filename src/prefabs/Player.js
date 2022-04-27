@@ -23,10 +23,6 @@ class Player extends Phaser.GameObjects.Sprite
       // init configs
       this.playerConfig = playerConfig;
       
-
-      // define lane positions
-      
-
       //this.sfxRocket = scene.sound.add('sfx_'); // sfx
     }
 
