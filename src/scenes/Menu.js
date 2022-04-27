@@ -40,6 +40,20 @@ class Menu extends Phaser.Scene
         keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         keyZ = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
         keyX = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
+
+        // Code Taken From https://phaser.io/examples/v3/view/input/keyboard/konami-code-key-combo
+        var combo = this.input.keyboard.createCombo([ Phaser.Input.Keyboard.KeyCodes.UP, Phaser.Input.Keyboard.KeyCodes.UP, 
+                                                      Phaser.Input.Keyboard.KeyCodes.DOWN, Phaser.Input.Keyboard.KeyCodes.DOWN,
+                                                      Phaser.Input.Keyboard.KeyCodes.LEFT, Phaser.Input.Keyboard.KeyCodes.RIGHT,
+                                                      Phaser.Input.Keyboard.KeyCodes.LEFT, Phaser.Input.Keyboard.KeyCodes.RIGHT,
+                                                      Phaser.Input.Keyboard.KeyCodes.B, Phaser.Input.Keyboard.KeyCodes.A,
+                                                      Phaser.Input.Keyboard.KeyCodes.ENTER], { resetOnMatch: true });
+
+        this.input.keyboard.on('keycombomatch', function (event) 
+        {
+            console.log('Konami Code entered!');
+            playerConfig.gunMode = true; // enable gun mode
+        });
     }
 
     update()
