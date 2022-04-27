@@ -94,6 +94,11 @@ class Play extends Phaser.Scene
         this.heart1 = this.add.sprite(game.config.width - 50, game.config.height/16, 'heart');
         this.heart2 = this.add.sprite(game.config.width - 120, game.config.height/16, 'heart');
         this.heart3 = this.add.sprite(game.config.width - 190, game.config.height/16, 'heart');
+        this.heartArray = [
+            this.heart1,
+            this.heart2,
+            this.heart3
+        ]
     }
 
     update()
@@ -120,7 +125,15 @@ class Play extends Phaser.Scene
             console.log("hit");
             this.obstacle1.destroy()
             this.obstacle1 = this.spawnNewObstacle();
-            
+
+
+            if(this.heartArray != 0){
+                this.damagedHeart = this.heartArray.shift()
+                this.damagedHeart.destroy()
+            }
+            if(this.heartArray.length == 0){
+                console.log("game over")
+            }
         }
 
         if(this.obstacle1.OutOfBounds){
