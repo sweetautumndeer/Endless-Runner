@@ -30,6 +30,9 @@ class Menu extends Phaser.Scene
             },
             fixedWidth: 0
         }
+        this.game.config.currentScore = 0;
+        
+        this.game.config.highScore = 0;
         
         // show menu text
         this.add.text(game.config.width/2, game.config.height/2, 'Unnamed Pirate Runner', menuConfig).setOrigin(0.5);

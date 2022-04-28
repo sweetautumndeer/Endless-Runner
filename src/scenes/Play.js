@@ -43,6 +43,7 @@ class Play extends Phaser.Scene
         this.startTime = game.getTime();
         this.currentTime = this.startTime;
 
+
         // Define game controls
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
@@ -124,11 +125,14 @@ class Play extends Phaser.Scene
             });
 
             if(this.heartArray != 0){
-                this.damagedHeart = this.heartArray.pop()
-                this.damagedHeart.destroy()
+                this.damagedHeart = this.heartArray.pop();
+                this.damagedHeart.destroy();
             }
             if(this.heartArray.length == 0){
-                console.log("game over")
+                console.log("game over");
+                this.game.config.currentScore = Math.floor(this.p1Score);
+                console.log(this.game.config.currentScore);
+                this.scene.start("endScene");
             }
         }
 
@@ -138,7 +142,7 @@ class Play extends Phaser.Scene
             this.obstacle1 = this.spawnNewObstacle();
         }
         
-    
+        
         this.player.update();
         this.obstacle1.update();
         this.updateScore();
