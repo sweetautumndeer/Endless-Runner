@@ -19,7 +19,7 @@ class Play extends Phaser.Scene
         this.load.image('sky_bg', './assets/sky_bg.png');
         this.load.image('clouds', './assets/clouds.png');
         this.load.image('shork', './assets/shork.png');
-        this.load.image('heart', './assets/heart.png');
+        this.load.image('heart', './assets/Heart.png');
         this.load.image('gun', './assets/gun_png_by_xx_thanosbeatbox_xx_ddxajtn-fullview.png')
     }
 
@@ -43,7 +43,6 @@ class Play extends Phaser.Scene
         this.startTime = game.getTime();
         this.currentTime = this.startTime;
 
-
         // Define game controls
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         keyDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
@@ -66,7 +65,8 @@ class Play extends Phaser.Scene
             },
             fixedWidth: 100
         }
-        this.scoreLeft = this.add.text(game.config.width/3, game.config.height/3, this.p1Score, scoreConfig);
+        this.scoreLeft = this.add.text(game.config.width/16, game.config.height/16, this.p1Score, scoreConfig);
+
         // small tutorial
         let tutorialConfig = {
             fontFamily: 'Courier',
@@ -125,14 +125,11 @@ class Play extends Phaser.Scene
             });
 
             if(this.heartArray != 0){
-                this.damagedHeart = this.heartArray.pop();
-                this.damagedHeart.destroy();
+                this.damagedHeart = this.heartArray.pop()
+                this.damagedHeart.destroy()
             }
             if(this.heartArray.length == 0){
-                console.log("game over");
-                this.game.config.currentScore = Math.floor(this.p1Score);
-                console.log(this.game.config.currentScore);
-                this.scene.start("endScene");
+                console.log("game over")
             }
         }
 
@@ -142,7 +139,7 @@ class Play extends Phaser.Scene
             this.obstacle1 = this.spawnNewObstacle();
         }
         
-        
+    
         this.player.update();
         this.obstacle1.update();
         this.updateScore();
