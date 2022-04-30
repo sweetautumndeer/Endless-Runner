@@ -129,7 +129,9 @@ class Play extends Phaser.Scene
                 this.damagedHeart.destroy()
             }
             if(this.heartArray.length == 0){
-                console.log("game over")
+                console.log("game over");
+                this.game.config.currentScore = Math.floor(this.p1Score);
+                this.scene.start("endScene");
             }
         }
 
