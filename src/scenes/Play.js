@@ -11,12 +11,12 @@ class Play extends Phaser.Scene
 
     preload()
     {   
-        this.load.atlas('ship', './assets/shipspritesheet.png', './assets/shipsprites.json');
+        this.load.atlas('stuff', './assets/endlessrunnerspritesheet.png', './assets/endlessrunnersprites.json');
 
         /*this.load.image('player', './assets/ship_sprite1.png');
         this.load.image('playerframe2', './assets/ship_sprite2.png');
         this.load.image('playerframe3', './assets/ship_sprite3.png');*/
-        this.load.image('sky_bg', './assets/sky_bg.png');
+        this.load.image('sky_bg', './assets/sky_bg2.png');
         this.load.image('clouds', './assets/clouds.png');
         this.load.image('shork', './assets/shork.png');
         this.load.image('heart', './assets/Heart.png');
@@ -26,10 +26,14 @@ class Play extends Phaser.Scene
     create()
     {
         // initialize animations
-        var shipframes = this.anims.generateFrameNames('ship', { prefix: 'ship', start: 0, end: 1, zeroPad: 2})
+        var shipframes = this.anims.generateFrameNames('stuff', { prefix: 'ship', start: 0, end: 1, zeroPad: 2})
         this.anims.create({ key: 'sails', frames: shipframes, frameRate: 4, repeat: -1 });
-        var shiphurts = this.anims.generateFrameNames('ship', { prefix: 'shiphurt', start: 1, end: 2, zeroPad: 2 });
+        var shiphurts = this.anims.generateFrameNames('stuff', { prefix: 'shiphurt', start: 1, end: 2, zeroPad: 2 });
         this.anims.create({ key: 'hurt', frames: shiphurts, frameRate: 6, repeat: 3});
+        var volcano = this.anims.generateFrameNames('stuff', { prefix: 'islandvolcano', start: 1, end: 4, zeroPad: 2 });
+        this.anims.create({ key: 'volcano', frames: volcano, frameRate: 10, repeat: 2});
+        var eruption = this.anims.generateFrameNames('stuff', { prefix: 'islandvolcano', start: 5, end: 6, zeroPad: 2 });
+        this.anims.create({ key: 'eruption', frames: eruption, frameRate: 10, repeat: -1});
 
         //defines background
         this.background = this.add.tileSprite(0, 0, 2600, 768, 'sky_bg').setOrigin(0, 0);
@@ -37,9 +41,10 @@ class Play extends Phaser.Scene
         console.log("play scene!!");
 
         //player definition
-        this.player = new Player(this, game.config.width/8, game.config.height/2, 'ship').play('sails');
+        this.player = new Player(this, game.config.width/8, game.config.height/2, 'stuff').play('sails');
         this.obstacle1 = new Obstacle(this, game.config.width, game.config.height/2 - 50, 'shork', 0, 1).setOrigin(0,0);
         this.obstacle1.setScale(3);
+        this.obstacle2 = new Obstacle2(this, game.config.width, game.config.height/2 - 50, 'stuff', 0, 1).setOrigin(0,0).play('volcano');
         this.startTime = game.getTime();
         this.currentTime = this.startTime;
 
@@ -65,7 +70,7 @@ class Play extends Phaser.Scene
             },
             fixedWidth: 100
         }
-        this.scoreLeft = this.add.text(game.config.width/16, game.config.height/16, this.p1Score, scoreConfig);
+        this.scoreLeft = this.add.text(game.config.width/16, game.config.height/25, this.p1Score, scoreConfig);
 
         // small tutorial
         let tutorialConfig = {
@@ -113,6 +118,10 @@ class Play extends Phaser.Scene
             this.tutorial.destroy();
         }
 
+        this.obstacle2.on('animationcomplete', () => {    // callback after anim completes
+            this.obstacle2.play('eruption');
+        });
+
         if(this.checkCollision(this.player, this.obstacle1)){
             console.log("hit");
             this.obstacle1.destroy()
@@ -133,15 +142,44 @@ class Play extends Phaser.Scene
             }
         }
 
+        // island collision
+        if(this.checkCollision(this.player, this.obstacle2)){
+            console.log("hit");
+            this.obstacle2.destroy()
+            this.obstacle2 = this.spawnNewObstacle2();
+
+            // play damage animation
+            this.player.play('hurt');
+            this.player.on('animationcomplete', () => {    // callback after anim completes
+                this.player.play('sails');
+            });
+
+            if(this.heartArray != 0){
+                this.damagedHeart = this.heartArray.pop()
+                this.damagedHeart.destroy()
+            }
+            if(this.heartArray.length == 0){
+                console.log("game over");
+                this.game.config.currentScore = Math.floor(this.p1Score);
+                this.scene.start("endScene");
+            }
+        }
+
         if(this.obstacle1.OutOfBounds){
             console.log("out of bounds");
             this.obstacle1.destroy()
             this.obstacle1 = this.spawnNewObstacle();
         }
+        if(this.obstacle2.OutOfBounds){
+            console.log("out of bounds");
+            this.obstacle2.destroy()
+            this.obstacle2 = this.spawnNewObstacle2();
+        }
         
     
         this.player.update();
         this.obstacle1.update();
+        this.obstacle2.update();
         this.updateScore();
     }
 
@@ -164,6 +202,10 @@ class Play extends Phaser.Scene
 
     spawnNewObstacle(){
         return new Obstacle(this, game.config.width, game.config.height/2 - 50, 'shork', 0, 1).setOrigin(0,0);
+    }
+
+    spawnNewObstacle2(){
+        return new Obstacle2(this, game.config.width, game.config.height/2 - 50, 'stuff', 0, 1).setOrigin(0,0).play('volcano');
     }
    
 }
