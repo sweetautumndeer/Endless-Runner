@@ -28,8 +28,8 @@ let lanePos = [ config.height * 5/6, config.height/2, config.height/6 ];
 let playerConfig = {
     health: 3,
     initMoveSpeed: 200, // movement speed at game start
-    maxMoveSpeed: 3000, // movement speed after a good while
-    moveSpeedIncreasePerSecond: 10, // how fast the movement speed increases
+    maxMoveSpeed: 5000, // movement speed after a good while
+    moveSpeedIncreasePerSecond: 15, // how fast the movement speed increases
     startingLane: lanes.middle, // starting position
     laneSwitchTime: 250, // milliseconds taken to switch lanes
     godMode: false,

@@ -9,6 +9,10 @@ class Obstacle extends Phaser.GameObjects.Sprite {
         this.damage = damageVal;   // store pointValue
         this.y = lanePos[Math.floor(Math.random() * 3)] - 50;
         this.OutOfBounds = false;
+        this.width = 53;
+        this.height = 53;
+        console.log(this.width);
+        console.log(this.height);
         this.setScale(3)
                // pixels per frame
     }

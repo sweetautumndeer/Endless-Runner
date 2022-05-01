@@ -19,6 +19,7 @@ class Play extends Phaser.Scene
         this.load.image('sky_bg', './assets/sky_bg2.png');
         this.load.image('clouds', './assets/clouds.png');
         this.load.image('shork', './assets/shork.png');
+        this.load.image('coinboost', './assets/coinboost.png');
         this.load.image('heart', './assets/Heart.png');
         this.load.image('gun', './assets/gun_png_by_xx_thanosbeatbox_xx_ddxajtn-fullview.png')
     }
@@ -44,8 +45,9 @@ class Play extends Phaser.Scene
         this.player = new Player(this, game.config.width/8, game.config.height/2, 'stuff').play('sails');
         this.obstacle1 = new Obstacle(this, game.config.width, game.config.height/2 - 50, 'shork', 0, 1).setOrigin(0,0);
         this.obstacle1.setScale(3);
-        this.obstacle2 = new Obstacle2(this, game.config.width, game.config.height/2 - 50, 'stuff', 0, 1).setOrigin(0,0).play('volcano');
+        // this.obstacle2 = new Obstacle2(this, game.config.width, game.config.height/2 - 50, 'stuff', 0, 1).setOrigin(0,0).play('volcano');
         this.startTime = game.getTime();
+       
         this.currentTime = this.startTime;
 
         // Define game controls
@@ -117,10 +119,13 @@ class Play extends Phaser.Scene
         {
             this.tutorial.destroy();
         }
-
-        this.obstacle2.on('animationcomplete', () => {    // callback after anim completes
-            this.obstacle2.play('eruption');
+      
+        this.obstacle1.on('animationcomplete', () => {    // callback after anim completes
+            this.obstacle1.play('eruption');
         });
+        
+
+       
 
         if(this.checkCollision(this.player, this.obstacle1)){
             console.log("hit");
@@ -140,48 +145,57 @@ class Play extends Phaser.Scene
             if(this.heartArray.length == 0){
                 console.log("game over");
                 this.game.config.currentScore = Math.floor(this.p1Score);
+                currentSpeed = playerConfig.initMoveSpeed;
                 this.scene.start("endScene");
             }
         }
+        // if(this.checkCollision(this.player, this.booster)){
+        //     console.log("hit");
+        //     this.obstacle1.destroy()
+        //     this.obstacle1 = this.spawnNewObstacle();
+
+        //     this.game.config
+
+        // }
 
         // island collision
-        if(this.checkCollision(this.player, this.obstacle2)){
-            console.log("hit");
-            this.obstacle2.destroy()
-            this.obstacle2 = this.spawnNewObstacle2();
+        // if(this.checkCollision(this.player, this.obstacle2)){
+        //     console.log("hit");
+        //     this.obstacle2.destroy()
+        //     this.obstacle2 = this.spawnNewObstacle2();
 
-            // play damage animation
-            this.player.play('hurt');
-            this.player.on('animationcomplete', () => {    // callback after anim completes
-                this.player.play('sails');
-            });
+        //     // play damage animation
+        //     this.player.play('hurt');
+        //     this.player.on('animationcomplete', () => {    // callback after anim completes
+        //         this.player.play('sails');
+        //     });
 
-            if(this.heartArray != 0){
-                this.damagedHeart = this.heartArray.pop()
-                this.damagedHeart.destroy()
-            }
-            if(this.heartArray.length == 0){
-                console.log("game over");
-                this.game.config.currentScore = Math.floor(this.p1Score);
-                this.scene.start("endScene");
-            }
-        }
+        //     if(this.heartArray != 0){
+        //         this.damagedHeart = this.heartArray.pop()
+        //         this.damagedHeart.destroy()
+        //     }
+        //     if(this.heartArray.length == 0){
+        //         console.log("game over");
+        //         this.game.config.currentScore = Math.floor(this.p1Score);
+        //         this.scene.start("endScene");
+        //     }
+        // }
 
         if(this.obstacle1.OutOfBounds){
             console.log("out of bounds");
             this.obstacle1.destroy()
             this.obstacle1 = this.spawnNewObstacle();
         }
-        if(this.obstacle2.OutOfBounds){
-            console.log("out of bounds");
-            this.obstacle2.destroy()
-            this.obstacle2 = this.spawnNewObstacle2();
-        }
+        // if(this.obstacle2.OutOfBounds){
+        //     console.log("out of bounds");
+        //     this.obstacle2.destroy()
+        //     this.obstacle2 = this.spawnNewObstacle2();
+        // }
         
     
         this.player.update();
         this.obstacle1.update();
-        this.obstacle2.update();
+        // this.obstacle2.update();
         this.updateScore();
     }
 
@@ -203,11 +217,17 @@ class Play extends Phaser.Scene
     }
 
     spawnNewObstacle(){
-        return new Obstacle(this, game.config.width, game.config.height/2 - 50, 'shork', 0, 1).setOrigin(0,0);
+        this.obVar = Math.floor(Math.random() * 7);
+        console.log(this.obVar);
+        if(this.obVar > 1){
+            return new Obstacle(this, game.config.width, game.config.height/2 - 50, 'shork', 0, 1).setOrigin(0,0);
+        }
+        return new Obstacle2(this, game.config.width, game.config.height/2 - 50, 'stuff', 0, 1).setOrigin(0,0).play('volcano');
+        
     }
 
-    spawnNewObstacle2(){
-        return new Obstacle2(this, game.config.width, game.config.height/2 - 50, 'stuff', 0, 1).setOrigin(0,0).play('volcano');
-    }
+    // spawnNewObstacle2(){
+    //     return new Obstacle2(this, game.config.width, game.config.height/2 - 50, 'stuff', 0, 1).setOrigin(0,0).play('volcano');
+    // }
    
 }
