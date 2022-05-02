@@ -7,8 +7,10 @@ class Obstacle2 extends Phaser.GameObjects.Sprite {
         super(scene, x, y, texture, frame);
         scene.add.existing(this);   // add to existing scene
         this.damage = damageVal;   // store pointValue
-        this.y = game.config.height/5;
+        this.y = game.config.height/5.5;
         this.OutOfBounds = false;
+        this.setScale(1.5);
+        this.setSize(128,256);
     }
 
     update() {

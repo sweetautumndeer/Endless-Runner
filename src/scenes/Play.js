@@ -159,7 +159,7 @@ class Play extends Phaser.Scene
             this.coinBoost.destroy()
             this.coinBoost = this.spawnNewCoin();
 
-            currentSpeed += 5;
+            currentSpeed += 2;
             this.p1Score += this.coinBoost.Points;
         }
 
@@ -174,18 +174,11 @@ class Play extends Phaser.Scene
             this.coinBoost.destroy();
             this.coinBoost = this.spawnNewCoin();
 
-        }
-        // if(this.obstacle2.OutOfBounds){
-        //     console.log("out of bounds");
-        //     this.obstacle2.destroy()
-        //     this.obstacle2 = this.spawnNewObstacle2();
-        // }
-        
+        }       
     
         this.player.update();
         this.obstacle1.update();
         this.coinBoost.update()
-        // this.obstacle2.update();
         this.updateScore();
     }
 
@@ -224,8 +217,4 @@ class Play extends Phaser.Scene
         return new Booster(this, game.config.width, game.config.height/2 - 50, 'coinboost', 0, 1000);
     }
 
-    // spawnNewObstacle2(){
-    //     return new Obstacle2(this, game.config.width, game.config.height/2 - 50, 'stuff', 0, 1).setOrigin(0,0).play('volcano');
-    // }
-   
 }

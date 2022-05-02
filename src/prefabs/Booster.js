@@ -4,7 +4,7 @@ class Booster extends Phaser.GameObjects.Sprite {
         scene.add.existing(this);   // add to existing scene
         this.Points = pointIncrease;   // store pointValue
         this.OutOfBounds = false;
-        this.y = lanePos[Math.floor(Math.random() * 3)] - 50;
+        this.y = lanePos[Math.floor(Math.random() * 3)];
         
     }
 
