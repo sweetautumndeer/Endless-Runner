@@ -45,6 +45,7 @@ class Play extends Phaser.Scene
         this.player = new Player(this, game.config.width/8, game.config.height/2, 'stuff').play('sails');
         this.obstacle1 = new Obstacle(this, game.config.width, game.config.height/2 - 50, 'shork', 0, 1).setOrigin(0,0);
         this.obstacle1.setScale(3);
+        this.coinBoost = new Booster(this, game.config.width, game.config.height/2 - 50, 'coinboost', 0, 1000);;
         // this.obstacle2 = new Obstacle2(this, game.config.width, game.config.height/2 - 50, 'stuff', 0, 1).setOrigin(0,0).play('volcano');
         this.startTime = game.getTime();
        
@@ -149,6 +150,14 @@ class Play extends Phaser.Scene
                 this.scene.start("endScene");
             }
         }
+        if(this.checkCollision(this.player, this.coinBoost)){
+            console.log("hit");
+            this.coinBoost.destroy()
+            this.coinBoost = this.spawnNewCoin();
+
+            currentSpeed += 50;
+            this.p1Score += this.coinBoost.Points;
+        }
         // if(this.checkCollision(this.player, this.booster)){
         //     console.log("hit");
         //     this.obstacle1.destroy()
@@ -186,6 +195,12 @@ class Play extends Phaser.Scene
             this.obstacle1.destroy()
             this.obstacle1 = this.spawnNewObstacle();
         }
+        if(this.coinBoost.OutOfBounds){
+            console.log("coin out of bounds");
+            this.coinBoost.destroy();
+            this.coinBoost = this.spawnNewCoin();
+
+        }
         // if(this.obstacle2.OutOfBounds){
         //     console.log("out of bounds");
         //     this.obstacle2.destroy()
@@ -195,6 +210,7 @@ class Play extends Phaser.Scene
     
         this.player.update();
         this.obstacle1.update();
+        this.coinBoost.update()
         // this.obstacle2.update();
         this.updateScore();
     }
@@ -224,6 +240,11 @@ class Play extends Phaser.Scene
         }
         return new Obstacle2(this, game.config.width, game.config.height/2 - 50, 'stuff', 0, 1).setOrigin(0,0).play('volcano');
         
+        
+    }
+
+    spawnNewCoin(){
+        return new Booster(this, game.config.width, game.config.height/2 - 50, 'coinboost', 0, 1000);
     }
 
     // spawnNewObstacle2(){
