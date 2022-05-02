@@ -121,6 +121,7 @@ class Play extends Phaser.Scene
        // obstacle collision
         if(this.checkCollision(this.player, this.obstacle1)){
             console.log("hit");
+            prevPosObs = this.obstacle1.y;
             this.obstacle1.destroy()
             this.obstacle1 = this.spawnNewObstacle();
 
@@ -137,8 +138,16 @@ class Play extends Phaser.Scene
             if(this.heartArray.length == 0){
                 console.log("game over");
                 this.game.config.currentScore = Math.floor(this.p1Score);
-                currentSpeed = playerConfig.initMoveSpeed;
-                this.scene.start("endScene");
+                
+                currentSpeed = 0;
+                playerConfig.moveSpeedIncreasePerSecond = 0;
+                this.player.destroy();
+                this.clock = this.time.delayedCall(3000, () => {
+                    this.scene.start("endScene");
+                    currentSpeed = playerConfig.initMoveSpeed;
+                    playerConfig.moveSpeedIncreasePerSecond = 5;
+                }, null, this);
+                
             }
         }
 
@@ -146,6 +155,7 @@ class Play extends Phaser.Scene
         if(this.checkCollision(this.player, this.coinBoost)){
             coincollect.play(); // play sfx
             console.log("hit");
+            prevPosCoin = this.coinBoost.y;
             this.coinBoost.destroy()
             this.coinBoost = this.spawnNewCoin();
 
@@ -156,11 +166,13 @@ class Play extends Phaser.Scene
         // spawn a new obstacle if one reaches the end of the screen
         if(this.obstacle1.OutOfBounds){
             console.log("out of bounds");
+            prevPosObs = this.obstacle1.y;
             this.obstacle1.destroy()
             this.obstacle1 = this.spawnNewObstacle();
         }
         if(this.coinBoost.OutOfBounds){
             console.log("coin out of bounds");
+            this.prevPosCoin = this.coinBoost.y;
             this.coinBoost.destroy();
             this.coinBoost = this.spawnNewCoin();
 
@@ -204,7 +216,7 @@ class Play extends Phaser.Scene
     }
 
     spawnNewCoin(){
-        return new Booster(this, game.config.width, game.config.height/2 - 50, 'coinboost', 0, 1000);
+        return new Booster(this, game.config.width, game.config.height/2 - 50, 'coinboost', 0, 2000);
     }
 
 }

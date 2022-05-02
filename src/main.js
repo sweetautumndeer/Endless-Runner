@@ -43,6 +43,8 @@ let playerConfig = {
 //  vars for moving objects/background
 let currentSpeed = playerConfig.initMoveSpeed;
 let deltaT;
+let prevPosObs = lanePos[0];
+let prevPosCoin = lanePos[1];
 
 // reserve audio vars
 let music, shipcrash, laneswitch, coincollect, menuselect;
