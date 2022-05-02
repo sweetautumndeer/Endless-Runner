@@ -38,7 +38,7 @@ class Play extends Phaser.Scene
         this.player = new Player(this, game.config.width/8, game.config.height/2, 'stuff').play('sails');
         this.obstacle1 = new Obstacle(this, game.config.width, game.config.height/2 - 50, 'stuff', 0, 1).setOrigin(0,0).play('shark');
         //this.obstacle1.setScale(3);
-        this.coinBoost = new Booster(this, game.config.width, game.config.height/2 - 50, 'coinboost', 0, 1000);;
+        this.coinBoost = new Booster(this, game.config.width, game.config.height/2 - 50, 'coinboost', 0, playerConfig.coinValue);;
         // this.obstacle2 = new Obstacle2(this, game.config.width, game.config.height/2 - 50, 'stuff', 0, 1).setOrigin(0,0).play('volcano');
         this.startTime = game.getTime();
        
@@ -71,8 +71,7 @@ class Play extends Phaser.Scene
         // small tutorial
         let tutorialConfig = {
             fontFamily: 'Courier',
-            fontSize: '28px',
-            backgroundColor: '#F3B141',
+            fontSize: '100px',
             color: '#843605',
             align: 'center',
             padding: {
@@ -80,7 +79,8 @@ class Play extends Phaser.Scene
                 bottom: 5,
             }
         }
-        this.tutorial = this.add.text(game.config.width/2 , game.config.height/2, "Use ↑ and ↓ to move", tutorialConfig);
+        this.tutorialUpArrow = this.add.text(game.config.width/10 , game.config.height/4, "↑", tutorialConfig);
+        this.tutorialDownArrow = this.add.text(game.config.width/10 , game.config.height * 5/8, "↓", tutorialConfig);
 
         // Health UI
         this.heartArray = [];
@@ -107,9 +107,13 @@ class Play extends Phaser.Scene
         this.background.tilePositionX += currentSpeed * deltaT * playerConfig.backBGSpeed;
         this.clouds.tilePositionX += currentSpeed * deltaT * playerConfig.frontBGSpeed;
 
-        if (keyDOWN.isDown || keyUP.isDown)
+        if (keyDOWN.isDown)
         {
-            this.tutorial.destroy();
+            this.tutorialDownArrow.destroy();
+        }
+        if (keyUP.isDown)
+        {
+            this.tutorialUpArrow.destroy();
         }
       
         // island plays eruption animation
