@@ -38,12 +38,12 @@ class EndScreen extends Phaser.Scene
         console.log(this.game.config.highScore);
         if(this.game.config.currentScore > this.game.config.highScore){
           this.game.config.highScore = this.game.config.currentScore;     
-          this.add.text(game.config.width/2, game.config.height/2, 'new high score: ' +  this.game.config.highScore, menuConfig).setOrigin(0.5);
+          this.add.text(game.config.width/2, game.config.height/2, 'New High Score: ' +  this.game.config.highScore, menuConfig).setOrigin(0.5);
           this.add.text(game.config.width/2, game.config.height/2 + 50, 'Press Z to restart', menuConfig).setOrigin(0.5);      
         }
         else{
-            this.add.text(game.config.width/2, game.config.height/2, 'high score: ' + this.game.config.highScore, menuConfig).setOrigin(0.5);
-            this.add.text(game.config.width/2, game.config.height/2 + 50, 'your score: ' + this.game.config.currentScore, menuConfig).setOrigin(0.5);
+            this.add.text(game.config.width/2, game.config.height/2, 'High Score: ' + this.game.config.highScore, menuConfig).setOrigin(0.5);
+            this.add.text(game.config.width/2, game.config.height/2 + 50, 'Your Score: ' + this.game.config.currentScore, menuConfig).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/2 + 100, 'Press Z to restart', menuConfig).setOrigin(0.5);
     
         }
