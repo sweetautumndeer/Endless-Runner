@@ -35,6 +35,10 @@ class Play extends Phaser.Scene
         this.anims.create({ key: 'volcano', frames: volcano, frameRate: 10, repeat: 2});
         var eruption = this.anims.generateFrameNames('stuff', { prefix: 'islandvolcano', start: 5, end: 6, zeroPad: 2 });
         this.anims.create({ key: 'eruption', frames: eruption, frameRate: 10, repeat: -1});
+        var octopus = this.anims.generateFrameNames('stuff', { prefix: 'octopus', start: 1, end: 2, zeroPad: 2 });
+        this.anims.create({ key: 'octopus', frames: octopus, frameRate: 4, repeat: -1});
+        var shark = this.anims.generateFrameNames('stuff', { prefix: 'shark', start: 1, end: 2, zeroPad: 1 });
+        this.anims.create({ key: 'shark', frames: shark, frameRate: 10, repeat: -1});
 
         //defines background
         this.background = this.add.tileSprite(0, 0, 2600, 768, 'sky_bg').setOrigin(0, 0);
@@ -43,8 +47,8 @@ class Play extends Phaser.Scene
 
         //player definition
         this.player = new Player(this, game.config.width/8, game.config.height/2, 'stuff').play('sails');
-        this.obstacle1 = new Obstacle(this, game.config.width, game.config.height/2 - 50, 'shork', 0, 1).setOrigin(0,0);
-        this.obstacle1.setScale(3);
+        this.obstacle1 = new Obstacle(this, game.config.width, game.config.height/2 - 50, 'stuff', 0, 1).setOrigin(0,0).play('shark');
+        //this.obstacle1.setScale(3);
         this.coinBoost = new Booster(this, game.config.width, game.config.height/2 - 50, 'coinboost', 0, 1000);;
         // this.obstacle2 = new Obstacle2(this, game.config.width, game.config.height/2 - 50, 'stuff', 0, 1).setOrigin(0,0).play('volcano');
         this.startTime = game.getTime();
@@ -89,8 +93,6 @@ class Play extends Phaser.Scene
         }
         this.tutorial = this.add.text(game.config.width/2 , game.config.height/2, "Use ↑ and ↓ to move", tutorialConfig);
 
-        
-
         // Health UI
         this.heartArray = [];
         let initialHeartOffset = 60;
@@ -121,13 +123,13 @@ class Play extends Phaser.Scene
             this.tutorial.destroy();
         }
       
+        // island plays eruption animation
         this.obstacle1.on('animationcomplete', () => {    // callback after anim completes
             this.obstacle1.play('eruption');
         });
         
 
-       
-
+       // obstacle collision
         if(this.checkCollision(this.player, this.obstacle1)){
             console.log("hit");
             this.obstacle1.destroy()
@@ -150,46 +152,18 @@ class Play extends Phaser.Scene
                 this.scene.start("endScene");
             }
         }
+
+        // collect coin
         if(this.checkCollision(this.player, this.coinBoost)){
             console.log("hit");
             this.coinBoost.destroy()
             this.coinBoost = this.spawnNewCoin();
 
-            currentSpeed += 50;
+            currentSpeed += 5;
             this.p1Score += this.coinBoost.Points;
         }
-        // if(this.checkCollision(this.player, this.booster)){
-        //     console.log("hit");
-        //     this.obstacle1.destroy()
-        //     this.obstacle1 = this.spawnNewObstacle();
 
-        //     this.game.config
-
-        // }
-
-        // island collision
-        // if(this.checkCollision(this.player, this.obstacle2)){
-        //     console.log("hit");
-        //     this.obstacle2.destroy()
-        //     this.obstacle2 = this.spawnNewObstacle2();
-
-        //     // play damage animation
-        //     this.player.play('hurt');
-        //     this.player.on('animationcomplete', () => {    // callback after anim completes
-        //         this.player.play('sails');
-        //     });
-
-        //     if(this.heartArray != 0){
-        //         this.damagedHeart = this.heartArray.pop()
-        //         this.damagedHeart.destroy()
-        //     }
-        //     if(this.heartArray.length == 0){
-        //         console.log("game over");
-        //         this.game.config.currentScore = Math.floor(this.p1Score);
-        //         this.scene.start("endScene");
-        //     }
-        // }
-
+        // spawn a new obstacle if one reaches the end of the screen
         if(this.obstacle1.OutOfBounds){
             console.log("out of bounds");
             this.obstacle1.destroy()
@@ -235,8 +209,11 @@ class Play extends Phaser.Scene
     spawnNewObstacle(){
         this.obVar = Math.floor(Math.random() * 7);
         console.log(this.obVar);
-        if(this.obVar > 1){
-            return new Obstacle(this, game.config.width, game.config.height/2 - 50, 'shork', 0, 1).setOrigin(0,0);
+        if(this.obVar > 4){
+            return new Obstacle(this, game.config.width, game.config.height/2 - 50, 'stuff', 0, 1).setOrigin(0,0).play('shark');
+        }
+        else if(this.obVar <= 4 && this.obVar > 1){
+            return new Obstacle(this, game.config.width, game.config.height/2 - 50, 'stuff', 0, 1).setOrigin(0,0).play('octopus');
         }
         return new Obstacle2(this, game.config.width, game.config.height/2 - 50, 'stuff', 0, 1).setOrigin(0,0).play('volcano');
         
