@@ -25,6 +25,7 @@ class Load extends Phaser.Scene
         this.load.audio('music', './assets/SkyPirateSerenade.wav');
         this.load.audio('shipcrash', './assets/ShipCrash.wav');
         this.load.audio('laneswitch', './assets/LaneSwitch.wav');
+        this.load.audio('coincollect', './assets/CoinCollect.wav');
     }
 
     create()
@@ -33,6 +34,7 @@ class Load extends Phaser.Scene
 
         shipcrash = this.sound.add('shipcrash');
         laneswitch = this.sound.add('laneswitch');
+        coincollect = this.sound.add('coincollect');
         music = this.sound.add('music');
         music.setVolume(0.25);
         music.setLoop(true);

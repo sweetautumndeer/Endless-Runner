@@ -29,7 +29,12 @@ let playerConfig = {
     health: 3,
     initMoveSpeed: 200, // movement speed at game start
     maxMoveSpeed: 4000, // movement speed after a good while
-    moveSpeedIncreasePerSecond: 15, // how fast the movement speed increases
+    moveSpeedIncreasePerSecond: 5, // how fast the movement speed increases
+    backBGSpeed: 1, // speed factor for back background element
+    frontBGSpeed: 1.5, // speed factor for front background element
+    singleLaneObstacleSpeed: 2, // speed factor of shorks/octopi
+    doubleLaneObstacleSpeed: 1, // speed factor of volcanoes
+    coinSpeed: 2.5, // speed factor for coins
     startingLane: lanes.middle, // starting position
     laneSwitchTime: 250, // milliseconds taken to switch lanes
     godMode: false,
@@ -40,7 +45,7 @@ let currentSpeed = playerConfig.initMoveSpeed;
 let deltaT;
 
 // reserve audio vars
-let music, shipcrash, laneswitch;
+let music, shipcrash, laneswitch, coincollect, menuselect;
 
 // define game canvas
 let game = new Phaser.Game(config);

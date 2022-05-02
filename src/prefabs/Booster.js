@@ -10,7 +10,7 @@ class Booster extends Phaser.GameObjects.Sprite {
 
     update() {
         // move obstacle left
-        this.x -= currentSpeed * deltaT * 2.5;
+        this.x -= currentSpeed * deltaT * playerConfig.coinSpeed;
         // wrap around from left edge to right edge
         if(this.x <= 0 - this.width) {
             this.OutOfBounds = true;;

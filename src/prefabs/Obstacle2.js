@@ -15,7 +15,7 @@ class Obstacle2 extends Phaser.GameObjects.Sprite {
 
     update() {
         // move obstacle left
-        this.x -= currentSpeed * deltaT;
+        this.x -= currentSpeed * deltaT * playerConfig.doubleLaneObstacleSpeed;
         // wrap around from left edge to right edge
         if(this.x <= 0 - this.width) {
             this.OutOfBounds = true;;

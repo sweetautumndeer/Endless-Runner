@@ -104,8 +104,8 @@ class Play extends Phaser.Scene
             currentSpeed += playerConfig.moveSpeedIncreasePerSecond * deltaT;
 
         // background scrolling
-        this.background.tilePositionX += currentSpeed * deltaT;
-        this.clouds.tilePositionX += currentSpeed * deltaT * 1.5;
+        this.background.tilePositionX += currentSpeed * deltaT * playerConfig.backBGSpeed;
+        this.clouds.tilePositionX += currentSpeed * deltaT * playerConfig.frontBGSpeed;
 
         if (keyDOWN.isDown || keyUP.isDown)
         {
@@ -144,6 +144,7 @@ class Play extends Phaser.Scene
 
         // collect coin
         if(this.checkCollision(this.player, this.coinBoost)){
+            coincollect.play(); // play sfx
             console.log("hit");
             this.coinBoost.destroy()
             this.coinBoost = this.spawnNewCoin();
