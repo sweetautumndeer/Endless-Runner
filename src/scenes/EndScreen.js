@@ -55,6 +55,6 @@ class EndScreen extends Phaser.Scene
     {
         // User Input here
         if (Phaser.Input.Keyboard.JustDown(keyZ))
-            this.scene.start("loadScene"); // load game
+            this.scene.start("playScene"); // load game
     }
 }

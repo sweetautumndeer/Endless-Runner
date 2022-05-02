@@ -87,6 +87,7 @@ class Player extends Phaser.GameObjects.Sprite
 
     InitLaneSwitch()
     {   
+        laneswitch.play(); // play sfx
         // reset time
         this.timeElapsed = 0;
         this.startTime = game.getTime();

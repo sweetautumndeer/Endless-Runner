@@ -39,6 +39,9 @@ let playerConfig = {
 let currentSpeed = playerConfig.initMoveSpeed;
 let deltaT;
 
+// reserve audio vars
+let music, shipcrash, laneswitch;
+
 // define game canvas
 let game = new Phaser.Game(config);
 

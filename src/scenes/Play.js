@@ -11,17 +11,6 @@ class Play extends Phaser.Scene
 
     preload()
     {   
-        this.load.atlas('stuff', './assets/endlessrunnerspritesheet.png', './assets/endlessrunnersprites.json');
-
-        /*this.load.image('player', './assets/ship_sprite1.png');
-        this.load.image('playerframe2', './assets/ship_sprite2.png');
-        this.load.image('playerframe3', './assets/ship_sprite3.png');*/
-        this.load.image('sky_bg', './assets/sky_bg2.png');
-        this.load.image('clouds', './assets/clouds.png');
-        this.load.image('shork', './assets/shork.png');
-        this.load.image('coinboost', './assets/coinboost.png');
-        this.load.image('heart', './assets/Heart.png');
-        this.load.image('gun', './assets/gun_png_by_xx_thanosbeatbox_xx_ddxajtn-fullview.png')
     }
 
     create()
@@ -135,8 +124,8 @@ class Play extends Phaser.Scene
             this.obstacle1.destroy()
             this.obstacle1 = this.spawnNewObstacle();
 
-            // play damage animation
-            this.player.play('hurt');
+            shipcrash.play(); // play damage sfx
+            this.player.play('hurt'); // play damage animation
             this.player.on('animationcomplete', () => {    // callback after anim completes
                 this.player.play('sails');
             });
