@@ -11,16 +11,18 @@ class Menu extends Phaser.Scene
 
     preload()
     {
-        //load menu stuff here
+        this.load.image('title', './assets/endlessrunnertitlescreen.png');
 
     }
 
     create()
     {
+        this.title_screen = this.add.tileSprite(0, 0, 1366, 768, 'title').setOrigin(0, 0).setScrollFactor(0);
+
         // menu text configuration
         let menuConfig = {
             fontFamily: 'Courier',
-            fontSize: '28px',
+            fontSize: '40px',
             backgroundColor: '#AA11AA',
             color: '#FF77FF',
             align: 'right',
@@ -35,7 +37,7 @@ class Menu extends Phaser.Scene
         this.game.config.highScore = 0;
         
         // show menu text
-        this.add.text(game.config.width/2, game.config.height/2, 'Unnamed Pirate Runner', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/8, 'Sky Pirates', menuConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 + 50, 'Press \'Z\' to start!', menuConfig).setOrigin(0.5);
 
         // Define menu controls
