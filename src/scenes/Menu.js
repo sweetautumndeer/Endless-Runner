@@ -72,7 +72,8 @@ class Menu extends Phaser.Scene
         // User Input here
         if (Phaser.Input.Keyboard.JustDown(keyZ))
         {
-            menuselect.play();
+            if (!menuselect.isPlaying)
+                menuselect.play();
             this.started = true;
             this.startText.destroy();
         }
