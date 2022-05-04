@@ -31,6 +31,7 @@ class Load extends Phaser.Scene
         shipcrash = this.sound.add('shipcrash');
         laneswitch = this.sound.add('laneswitch');
         coincollect = this.sound.add('coincollect');
+        
         music = this.sound.add('music');
         music.setVolume(0.25);
         music.setLoop(true);

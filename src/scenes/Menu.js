@@ -13,10 +13,14 @@ class Menu extends Phaser.Scene
     {
         this.load.image('title', './assets/endlessrunnertitlescreen.png');
         this.load.image('logo', './assets/endlessrunner_logo.png');
+        this.load.audio('menuselect', './assets/Menu.wav');
+        
     }
 
     create()
     {
+        menuselect = this.sound.add('menuselect');
+
         this.title_screen = this.add.tileSprite(0, 0, 1366, 768, 'title').setOrigin(0, 0).setScrollFactor(0);
         this.logo = this.add.image(60, 200, 'logo').setOrigin(0, 0);
 
@@ -67,6 +71,14 @@ class Menu extends Phaser.Scene
     {
         // User Input here
         if (Phaser.Input.Keyboard.JustDown(keyZ))
+        {
+            menuselect.play();
+            this.started = true;
+        }
+
+        if (!menuselect.isPlaying && this.started)
+        {
             this.scene.start("loadScene"); // load game
+        }
     }
 }
