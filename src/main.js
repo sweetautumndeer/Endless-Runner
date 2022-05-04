@@ -35,8 +35,9 @@ let playerConfig = {
     singleLaneObstacleSpeed: 2, // speed factor of shorks/octopi
     doubleLaneObstacleSpeed: 1, // speed factor of volcanoes
     coinSpeed: 2.5, // speed factor for coins
-    coinValue: 1000, // amount of points coins give
-    coinTextDuration: 1, // amount of time the text after picking up a coin stays on screen
+    coinValue: 2000, // amount of points coins give
+    coinTextDuration: 0.75, // amount of time the text after picking up a coin stays on screen
+    coinTextScrollSpeed: 2, // speed at which coin text scrolls vertically
     startingLane: lanes.middle, // starting position
     laneSwitchTime: 250, // milliseconds taken to switch lanes
     godMode: false,

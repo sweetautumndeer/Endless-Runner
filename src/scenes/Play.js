@@ -180,6 +180,8 @@ class Play extends Phaser.Scene
             this.p1Score += this.coinBoost.Points;
         }
         this.timeSinceLastCoin += deltaT;
+        if (this.coinText)
+            this.coinText.y -= playerConfig.coinTextScrollSpeed;
         if (this.timeSinceLastCoin > playerConfig.coinTextDuration)
             this.coinText.destroy();
         
@@ -237,7 +239,7 @@ class Play extends Phaser.Scene
     }
 
     spawnNewCoin(){
-        return new Booster(this, game.config.width, game.config.height/2 - 50, 'coinboost', 0, 2000);
+        return new Booster(this, game.config.width, game.config.height/2 - 50, 'coinboost', 0, playerConfig.coinValue);
     }
 
 }
