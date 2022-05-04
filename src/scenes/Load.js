@@ -17,6 +17,7 @@ class Load extends Phaser.Scene
         this.load.atlas('stuff', './assets/endlessrunnerspritesheet.png', './assets/endlessrunnersprites.json');
         this.load.image('sky_bg', './assets/sky_bg2.png');
         this.load.image('clouds', './assets/clouds.png');
+        this.load.image('ocean', './assets/ocean.png');
         this.load.image('shork', './assets/shork.png');
         this.load.image('coinboost', './assets/coinboost.png');
         this.load.image('heart', './assets/Heart.png');

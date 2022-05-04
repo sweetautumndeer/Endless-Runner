@@ -32,6 +32,7 @@ class Play extends Phaser.Scene
         //defines background
         this.background = this.add.tileSprite(0, 0, 2600, 768, 'sky_bg').setOrigin(0, 0);
         this.clouds = this.add.tileSprite(0, 0, 1366, 768, 'clouds').setOrigin(0, 0);
+        this.ocean = this.add.tileSprite(0, 0, 2600, 768, 'ocean').setOrigin(0, 0);
         console.log("play scene!!");
 
         //player definition
@@ -104,6 +105,7 @@ class Play extends Phaser.Scene
         // background scrolling
         this.background.tilePositionX += currentSpeed * deltaT * playerConfig.backBGSpeed;
         this.clouds.tilePositionX += currentSpeed * deltaT * playerConfig.frontBGSpeed;
+        this.ocean.tilePositionX += currentSpeed * deltaT * playerConfig.frontBGSpeed * 0.05;
 
         if (keyDOWN.isDown)
         {
