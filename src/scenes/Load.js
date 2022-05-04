@@ -11,6 +11,9 @@ class Load extends Phaser.Scene
 
     preload()
     {
+        this.title_screen = this.add.tileSprite(0, 0, 1366, 768, 'title').setOrigin(0, 0).setScrollFactor(0);
+        this.logo = this.add.image(60, 200, 'logo').setOrigin(0, 0);
+
         this.load.atlas('stuff', './assets/endlessrunnerspritesheet.png', './assets/endlessrunnersprites.json');
         this.load.image('sky_bg', './assets/sky_bg2.png');
         this.load.image('clouds', './assets/clouds.png');
@@ -26,6 +29,8 @@ class Load extends Phaser.Scene
 
     create()
     {
+        
+
         console.log("loading...");
 
         shipcrash = this.sound.add('shipcrash');
@@ -35,13 +40,16 @@ class Load extends Phaser.Scene
         music = this.sound.add('music');
         music.setVolume(0.25);
         music.setLoop(true);
-        music.play();
 
-        this.scene.start("playScene");
+        
     }
 
     update()
     {
-
+        if (!menuselect.isPlaying)
+        {
+            music.play();
+            this.scene.start("playScene");
+        }
     }
 }

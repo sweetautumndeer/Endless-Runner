@@ -74,12 +74,7 @@ class Menu extends Phaser.Scene
         {
             if (!menuselect.isPlaying)
                 menuselect.play();
-            this.started = true;
             this.startText.destroy();
-        }
-
-        if (!menuselect.isPlaying && this.started)
-        {
             this.scene.start("loadScene"); // load game
         }
     }
