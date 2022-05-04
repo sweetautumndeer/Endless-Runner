@@ -43,7 +43,7 @@ class Menu extends Phaser.Scene
         
         // show menu text
         //this.add.text(game.config.width/2, game.config.height/8, 'Sky Pirates', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2+50, 'Press \'Z\' to start!', menuConfig).setOrigin(0.5);
+        this.startText = this.add.text(game.config.width/2, game.config.height/2+50, 'Press \'Z\' to start!', menuConfig).setOrigin(0.5);
 
         // Define menu controls
         keyUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
@@ -74,6 +74,7 @@ class Menu extends Phaser.Scene
         {
             menuselect.play();
             this.started = true;
+            this.startText.destroy();
         }
 
         if (!menuselect.isPlaying && this.started)
