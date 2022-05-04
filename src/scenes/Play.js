@@ -144,7 +144,7 @@ class Play extends Phaser.Scene
                 currentSpeed = 0;
                 playerConfig.moveSpeedIncreasePerSecond = 0;
                 this.player.destroy();
-                this.clock = this.time.delayedCall(3000, () => {
+                this.clock = this.time.delayedCall(1000, () => {
                     this.scene.start("endScene");
                     currentSpeed = playerConfig.initMoveSpeed;
                     playerConfig.moveSpeedIncreasePerSecond = 5;

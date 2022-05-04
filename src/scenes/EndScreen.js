@@ -10,18 +10,20 @@ class EndScreen extends Phaser.Scene
 
     preload()
     {
-        //load menu stuff here
-
+        this.load.image('title', './assets/endlessrunnertitlescreen.png');
+        
     }
 
     create()
     {
+        this.title_screen = this.add.tileSprite(0, 0, 1366, 768, 'title').setOrigin(0, 0).setScrollFactor(0);
+
         // menu text configuration
         let menuConfig = {
-            fontFamily: 'Courier',
-            fontSize: '28px',
-            backgroundColor: '#AA11AA',
-            color: '#FF77FF',
+            fontFamily: 'Georgia',
+            fontSize: '40px',
+            //backgroundColor: '#AA11AA',
+            color: '#ED1C24',
             align: 'right',
             padding: {
                 top: 5,
@@ -39,12 +41,12 @@ class EndScreen extends Phaser.Scene
         if(this.game.config.currentScore > this.game.config.highScore){
           this.game.config.highScore = this.game.config.currentScore;     
           this.add.text(game.config.width/2, game.config.height/2, 'New High Score: ' +  this.game.config.highScore, menuConfig).setOrigin(0.5);
-          this.add.text(game.config.width/2, game.config.height/2 + 50, 'Press Z to restart', menuConfig).setOrigin(0.5);      
+          this.add.text(game.config.width/2, game.config.height/2 + 75, 'Press \'Z\' to restart', menuConfig).setOrigin(0.5);      
         }
         else{
-            this.add.text(game.config.width/2, game.config.height/2, 'High Score: ' + this.game.config.highScore, menuConfig).setOrigin(0.5);
-            this.add.text(game.config.width/2, game.config.height/2 + 50, 'Your Score: ' + this.game.config.currentScore, menuConfig).setOrigin(0.5);
-            this.add.text(game.config.width/2, game.config.height/2 + 100, 'Press Z to restart', menuConfig).setOrigin(0.5);
+            this.add.text(game.config.width/2, game.config.height/2 - 75, 'High Score: ' + this.game.config.highScore, menuConfig).setOrigin(0.5);
+            this.add.text(game.config.width/2, game.config.height/2, 'Your Score: ' + this.game.config.currentScore, menuConfig).setOrigin(0.5);
+            this.add.text(game.config.width/2, game.config.height/2 + 75, 'Press \'Z\' to restart!', menuConfig).setOrigin(0.5);
     
         }
         
