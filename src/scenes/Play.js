@@ -162,7 +162,7 @@ class Play extends Phaser.Scene
 
             let coinConfig = {
                 fontFamily: 'Courier',
-                fontSize: '18px',
+                fontSize: '30px',
                 color: '#843605',
                 align: 'center',
                 padding: {
