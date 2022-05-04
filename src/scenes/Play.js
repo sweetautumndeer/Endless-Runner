@@ -170,6 +170,8 @@ class Play extends Phaser.Scene
                     bottom: 5,
                 }
             }
+            if (this.coinText)
+                this.coinText.destroy();
             this.coinText = this.add.text(this.coinBoost.x , this.coinBoost.y, "+" + playerConfig.coinValue, coinConfig);
             this.timeSinceLastCoin = 0;
 
