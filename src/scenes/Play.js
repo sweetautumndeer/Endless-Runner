@@ -37,9 +37,7 @@ class Play extends Phaser.Scene
         //player definition
         this.player = new Player(this, game.config.width/8, game.config.height/2, 'stuff').play('sails');
         this.obstacle1 = new Obstacle(this, game.config.width, game.config.height/2 - 50, 'stuff', 0, 1).setOrigin(0,0).play('shark');
-        //this.obstacle1.setScale(3);
         this.coinBoost = new Booster(this, game.config.width, game.config.height/2 - 50, 'coinboost', 0, playerConfig.coinValue);;
-        // this.obstacle2 = new Obstacle2(this, game.config.width, game.config.height/2 - 50, 'stuff', 0, 1).setOrigin(0,0).play('volcano');
         this.startTime = game.getTime();
        
         this.currentTime = this.startTime;

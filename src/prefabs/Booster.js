@@ -6,7 +6,7 @@ class Booster extends Phaser.GameObjects.Sprite {
         this.OutOfBounds = false;
         this.y = lanePos[Math.floor(Math.random() * 3)];
         while(this.y == prevPosCoin){
-            this.y = lanePos[Math.floor(Math.random() * 3)] - 50;
+            this.y = lanePos[Math.floor(Math.random() * 3)];
         }
         
     }
