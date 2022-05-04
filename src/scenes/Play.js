@@ -156,14 +156,33 @@ class Play extends Phaser.Scene
         // collect coin
         if(this.checkCollision(this.player, this.coinBoost)){
             coincollect.play(); // play sfx
+            
             console.log("hit");
             prevPosCoin = this.coinBoost.y;
-            this.coinBoost.destroy()
+
+            let coinConfig = {
+                fontFamily: 'Courier',
+                fontSize: '18px',
+                color: '#843605',
+                align: 'center',
+                padding: {
+                    top: 5,
+                    bottom: 5,
+                }
+            }
+            this.coinText = this.add.text(this.coinBoost.x , this.coinBoost.y, "+" + playerConfig.coinValue, coinConfig);
+            this.timeSinceLastCoin = 0;
+
+            this.coinBoost.destroy();
             this.coinBoost = this.spawnNewCoin();
 
             currentSpeed += 2;
             this.p1Score += this.coinBoost.Points;
         }
+        this.timeSinceLastCoin += deltaT;
+        if (this.timeSinceLastCoin > playerConfig.coinTextDuration)
+            this.coinText.destroy();
+        
 
         // spawn a new obstacle if one reaches the end of the screen
         if(this.obstacle1.OutOfBounds){

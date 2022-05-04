@@ -36,6 +36,7 @@ let playerConfig = {
     doubleLaneObstacleSpeed: 1, // speed factor of volcanoes
     coinSpeed: 2.5, // speed factor for coins
     coinValue: 1000, // amount of points coins give
+    coinTextDuration: 1, // amount of time the text after picking up a coin stays on screen
     startingLane: lanes.middle, // starting position
     laneSwitchTime: 250, // milliseconds taken to switch lanes
     godMode: false,
