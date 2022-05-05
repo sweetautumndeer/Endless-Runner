@@ -28,12 +28,13 @@ let lanePos = [ config.height * 5/6, config.height/2, config.height/6 ];
 let playerConfig = {
     health: 3,
     initMoveSpeed: 200, // movement speed at game start
-    maxMoveSpeed: 4000, // movement speed after a good while
+    maxMoveSpeed: 1500, // movement speed after a good while
     moveSpeedIncreasePerSecond: 5, // how fast the movement speed increases
-    backBGSpeed: 1, // speed factor for back background element
-    frontBGSpeed: 1.5, // speed factor for front background element
+    backBGSpeed: 0.075, // speed factor for back background element
+    frontBGSpeed: 0.5, // speed factor for front background element
+    groundBGSpeed: .025, // speed factor for the ocean background element
     singleLaneObstacleSpeed: 2, // speed factor of shorks/octopi
-    doubleLaneObstacleSpeed: 1, // speed factor of volcanoes
+    doubleLaneObstacleSpeed: 1.5, // speed factor of volcanoes
     coinSpeed: 2.5, // speed factor for coins
     coinValue: 2000, // amount of points coins give
     coinTextDuration: 0.75, // amount of time the text after picking up a coin stays on screen

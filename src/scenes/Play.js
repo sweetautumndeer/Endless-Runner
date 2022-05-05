@@ -105,7 +105,7 @@ class Play extends Phaser.Scene
         // background scrolling
         this.background.tilePositionX += currentSpeed * deltaT * playerConfig.backBGSpeed;
         this.clouds.tilePositionX += currentSpeed * deltaT * playerConfig.frontBGSpeed;
-        this.ocean.tilePositionX += currentSpeed * deltaT * playerConfig.frontBGSpeed * 0.05;
+        this.ocean.tilePositionX += currentSpeed * deltaT * playerConfig.groundBGSpeed;
 
         if (keyDOWN.isDown)
         {
