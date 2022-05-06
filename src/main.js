@@ -3,15 +3,20 @@
 // Game Title
 // Date Completed: 
 //
-// Creative Tilt Jusification
+// Creative Tilt Jusification:
 // 
 //
 //
-// For the visuals of the endless runner, they are somewhat rudamentary looking but
+// (Em) For the visuals of the endless runner, they are somewhat rudamentary looking but
 // considering that many of the assets have animations and it was my first time doing 
 // pixel art I am happy with how they came out. I also spent a lot of time on the background
 // which has 3 different layers. One small detail I was proud of was the ship sails being
 // sad when you get hit. 
+//
+// (Autumn) For the music, I tried making something akin to a sea shanty mixed with a couple elements
+// of electronic music. I think it ended up turning out pretty well! I also put a lot of effort into
+// making the sound effects, especially with making the ship crash sound crunchy like cracking wood (though
+// it still kinda sounds like gravel to me but close enough).
 //
 // ---------------------------------------------
 
