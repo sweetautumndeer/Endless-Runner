@@ -4,8 +4,15 @@
 // Date Completed: 
 //
 // Creative Tilt Jusification
-// a
 // 
+//
+//
+// For the visuals of the endless runner, they are somewhat rudamentary looking but
+// considering that many of the assets have animations and it was my first time doing 
+// pixel art I am happy with how they came out. I also spent a lot of time on the background
+// which has 3 different layers. One small detail I was proud of was the ship sails being
+// sad when you get hit. 
+//
 // ---------------------------------------------
 
 let config = {
