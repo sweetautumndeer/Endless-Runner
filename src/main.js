@@ -18,6 +18,13 @@
 // making the sound effects, especially with making the ship crash sound crunchy like cracking wood (though
 // it still kinda sounds like gravel to me but close enough).
 //
+// (Ethan) For the programming, Autumn implemented an input buffer for when the player will press
+// a button quickly to move the player up and down. I implemented the high score system using global
+// variables and also programmed a random obstacle spawner to generate different object. I also
+// made it so the obstacle also does not spawn on the same lane two times in a row. Autumn also made a
+// gun mode. If the player presses the Konami code in the menu scene, it will activate gun mode.
+// It places a png gun on the player ship and grant 20 health.
+//
 // ---------------------------------------------
 
 let config = {
